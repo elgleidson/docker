@@ -1,0 +1,35 @@
+version: '3.7'
+services:
+  sonarqube:
+    image: sonarqube
+    ports:
+    - 9000:9000
+#    networks:
+#    - sonarnet
+#    environment:
+#    - sonar.jdbc.username=sonar
+#    - sonar.jdbc.password=sonar
+#    - sonar.jdbc.url=jdbc:postgresql://sonarqubedb:5432/sonar
+    volumes:
+    - sonarqube-conf:/opt/sonarqube/conf
+    - sonarqube-data:/opt/sonarqube/data
+    - sonarqube-extensions:/opt/sonarqube/extensions
+#  sonarqubedb:
+#    image: postgres
+#    networks:
+#    - sonarnet
+#    environment:
+#    - POSTGRES_USER=sonar
+#    - POSTGRES_PASSWORD=sonar
+#    volumes:
+#    - sonarqubedb:/var/lib/postgresql
+#    - sonarqubedb-data:/var/lib/postgresql/data
+#networks:
+#  sonarnet:
+#    driver: bridge
+volumes:
+  sonarqube-conf:
+  sonarqube-data:
+  sonarqube-extensions:
+#  sonarqubedb:
+#  sonarqubedb-data:
