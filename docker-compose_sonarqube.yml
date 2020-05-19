@@ -15,7 +15,7 @@ services:
     - sonarqube-data:/opt/sonarqube/data
     - sonarqube-extensions:/opt/sonarqube/extensions
 #  sonarqubedb:
-#    image: postgres
+#    image: postgres:12.2-alpine
 #    networks:
 #    - sonarnet
 #    environment:
