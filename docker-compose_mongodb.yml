@@ -22,6 +22,8 @@ services:
       - mongodb-network
     ports:
       - 8888:8081
+    depends_on:
+      - mongodb
 networks: 
     mongodb-network:
       driver: bridge

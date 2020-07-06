@@ -27,6 +27,8 @@ services:
     networks:
       - postgres
     restart: unless-stopped
+    depends_on:
+      - postgres
 
 networks:
   postgres:
