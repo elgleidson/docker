@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   zookeeper:
-    image: confluentinc/cp-zookeeper:5.4.2
+    image: confluentinc/cp-zookeeper:7.6.1
     hostname: zookeeper
     container_name: zookeeper
     ports:
@@ -13,24 +13,8 @@ services:
     networks:
       - kafka_broker
 
-  kafdrop:
-    image: obsidiandynamics/kafdrop
-    restart: "no"
-    ports:
-      - "9003:9000"
-    environment:
-      KAFKA_BROKERCONNECT: "kafka:29092"
-      SCHEMAREGISTRY_CONNECT: "http://schema-registry:8081"
-      MESSAGE_FORMAT: "avro"
-      JVM_OPTS: "-Xms16M -Xmx48M -Xss180K -XX:-TieredCompilation -XX:+UseStringDeduplication -noverify"
-    networks:
-      - kafka_broker
-    depends_on:
-      - kafka
-      - schema-registry
-
   kafka:
-    image: confluentinc/cp-kafka:5.4.2
+    image: confluentinc/cp-kafka:7.6.1
     hostname: kafka
     container_name: kafka
     ports:
@@ -57,7 +41,7 @@ services:
       - kafka_broker
 
   schema-registry:
-    image: confluentinc/cp-schema-registry:5.5.0
+    image: confluentinc/cp-schema-registry:7.6.1
     hostname: schema-registry
     container_name: schema-registry
     depends_on:
@@ -68,9 +52,29 @@ services:
       - '48081:48081'
     environment:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
-      SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 'zookeeper:32181'
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'kafka:29092'
     networks:
       - kafka_broker
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    restart: "no"
+    ports:
+      - "9003:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
+      KAFKA_CLUSTERS_0_METRICS_PORT: 9997
+      KAFKA_CLUSTERS_0_SCHEMAREGISTRY: http://schema-registry:8081
+      DYNAMIC_CONFIG_ENABLED: 'true'
+      KAFKA_CLUSTERS_0_AUDIT_TOPICAUDITENABLED: 'true'
+      KAFKA_CLUSTERS_0_AUDIT_CONSOLEAUDITENABLED: 'true'
+    networks:
+      - kafka_broker
+    depends_on:
+      - kafka
+      - schema-registry
 
 networks:
   kafka_broker:
