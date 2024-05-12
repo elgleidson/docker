@@ -17,12 +17,12 @@ docker compose -f docker-compose_redis.yml -p redis up -d
 docker compose -f docker-compose_opensearch.yml -p opensearch up -d
 ```
 
-### MongoDB
+### MongoDB - http://localhost:8888
 ```shell
 docker compose -f docker-compose_mongodb.yml -p mongodb up -d
 ```
 
-### PostGres
+### PostgreSQL - http://localhost:5050
 ```shell
 docker compose -f docker-compose_postgres.yml -p postgres up -d
 ```
