@@ -2,7 +2,7 @@
 
 Some docker-compose files for use in my projects
 
-### Kafka
+### Kafka - http://localhost:9003
 ```shell
 docker compose -f docker-compose_kafka.yml -p kafka up -d
 ```
@@ -12,9 +12,9 @@ docker compose -f docker-compose_kafka.yml -p kafka up -d
 docker compose -f docker-compose_redis.yml -p redis up -d
 ```
 
-### Elastic-search
+### OpenSearch - http://localhost:5601
 ```shell
-docker compose -f docker-compose_elasticsearch.yml -p elasticsearch up -d
+docker compose -f docker-compose_opensearch.yml -p opensearch up -d
 ```
 
 ### MongoDB
