@@ -7,7 +7,7 @@ Some docker-compose files for use in my projects
 docker compose -f docker-compose_kafka.yml -p kafka up -d
 ```
 
-### Redis
+### Redis - http://localhost:8001
 ```shell
 docker compose -f docker-compose_redis.yml -p redis up -d
 ```
