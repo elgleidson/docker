@@ -27,7 +27,7 @@ docker compose -f docker-compose_mongodb.yml -p mongodb up -d
 docker compose -f docker-compose_postgres.yml -p postgres up -d
 ```
 
-### SonarQube
+### SonarQube - http://localhost:9000
 ```shell
 docker compose -f docker-compose_sonarqube.yml -p sonar up -d
 ```
