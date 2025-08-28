@@ -8,9 +8,6 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
-    networks:
-      - kafka-net
-
   kafka:
     image: confluentinc/cp-kafka:7.6.1
     hostname: kafka
@@ -35,9 +32,6 @@ services:
       #CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
       #CONFLUENT_METRICS_ENABLE: 'true'
       #CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
-    networks:
-      - kafka-net
-
   schema-registry:
     image: confluentinc/cp-schema-registry:7.6.1
     hostname: schema-registry
@@ -51,9 +45,6 @@ services:
     environment:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'kafka:29092'
-    networks:
-      - kafka-net
-
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
     container_name: kafka-ui
@@ -68,13 +59,6 @@ services:
       DYNAMIC_CONFIG_ENABLED: 'true'
       KAFKA_CLUSTERS_0_AUDIT_TOPICAUDITENABLED: 'true'
       KAFKA_CLUSTERS_0_AUDIT_CONSOLEAUDITENABLED: 'true'
-    networks:
-      - kafka-net
     depends_on:
       - kafka
       - schema-registry
-
-networks:
-  kafka-net:
-    name: zookeeper_schema_registry_kafka
-    driver: bridge

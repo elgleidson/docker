@@ -20,8 +20,6 @@ services:
     ports:
       - 9200:9200
       - 9600:9600
-    networks:
-      - opensearch-net
   opensearch-dashboards:
     image: opensearchproject/opensearch-dashboards:2.19.1
     container_name: opensearch-dashboards
@@ -32,11 +30,8 @@ services:
       - 5601:5601
     expose:
       - "5601"
-    networks:
-      - opensearch-net
     depends_on:
       - opensearch
 volumes:
   opensearch-data:
-networks:
-  opensearch-net:
+
